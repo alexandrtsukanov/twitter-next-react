@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { appConfig } from '../config';
 import Image from 'next/image';
+import AuthNavbarItems from '../components/authNavbarItems';
 
 const Navbar = () => {
     return (
@@ -27,14 +28,7 @@ const Navbar = () => {
                     )}
                 </ul>
 
-                <ul className="navbar-nav gap-16">
-                    <li className="nav-item nav-link active" aria-current="page" >
-                        Sign Up
-                    </li>
-                    <li className="nav-item nav-link active" aria-current="page" >
-                        Sign In
-                    </li>
-                </ul>
+                <AuthNavbarItems />
             </div>
         </nav>
     )
