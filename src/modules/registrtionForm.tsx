@@ -1,7 +1,11 @@
 import { ChangeEvent, SubmitEvent, useState } from "react";
 import { Button } from "../ui";
 
-const RegistrtionForm = () => {
+interface IProps {
+    onClose: () => void;
+}
+
+const RegistrtionForm = ({ onClose }: IProps) => {
     const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -82,7 +86,11 @@ const RegistrtionForm = () => {
                 <div className="invalid-feedback">Error password</div>
             </div>
 
-            <Button type="submit">Submit</Button>
+            <div>
+                <Button type="submit">Submit</Button>
+                <Button theme="secondary" onClick={onClose}>Cancel</Button>
+
+            </div>
         </form>
     )
 }

@@ -8,10 +8,9 @@ const AuthNavbarItems = () => {
     const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
     console.log(isRegistrationModalOpen);
-    
 
     const openRegistrationModal = useCallback(() => {
-        setRegistrationModalOpen(true);
+        setRegistrationModalOpen(prev => !prev);
     }, []);
 
     const openLoginModal = useCallback(() => {
@@ -49,11 +48,11 @@ const AuthNavbarItems = () => {
             ))}
 
             <Modal isOpen={isRegistrationModalOpen} onClose={() => setRegistrationModalOpen(false)}>
-                <RegistrtionForm />
+                <RegistrtionForm onClose={() => setRegistrationModalOpen(false)} />
             </Modal>
 
             <Modal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)}>
-                <RegistrtionForm />
+                <RegistrtionForm onClose={() => setRegistrationModalOpen(false)} />
             </Modal>
         </div>
     )

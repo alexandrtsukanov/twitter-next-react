@@ -33,7 +33,7 @@ const Modal = ({
     if (!isOpen) return null;
 
     return createPortal(
-        <div className="modal fade" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true" onClick={onClose}>
+        <div className="modal" onClick={onClose}>
             <div className="modal-dialog">
                 <div className="modal-content" onClick={e => e.stopPropagation()}>
                     <div className="modal-header">
