@@ -1,14 +1,14 @@
-import { ChangeEvent, useState } from "react";
-import { Modal } from "../ui";
+import { ChangeEvent, SubmitEvent, useState } from "react";
+import { Button } from "../ui";
 
 const RegistrtionForm = () => {
-    const [nick, setNick] = useState('');
+    const [nickname, setNickname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-    const changeNick = (event: ChangeEvent<HTMLInputElement>) => {
-        setNick(event.target.value);
+    const changeNickname = (event: ChangeEvent<HTMLInputElement>) => {
+        setNickname(event.target.value);
     };
 
     const changeEmail = (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,27 +23,67 @@ const RegistrtionForm = () => {
         setPasswordConfirmation(event.target.value);
     };
 
-    return (
-        <div>
-            {/* <Modal
-                title="Registration"
-                onSuccess={() => { console.log('Sign Ip') }}
-                successBtnText="Sign Up"
-                closeBtnText="Cancel"
-            >
-                <div>
-                    <input />
-                    <input />
-                    <input />
-                    <input />
-                </div>
-            </Modal> */}
+    const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        console.log('Form submitted');
+    };
 
-            <input type="text" value={nick} onChange={changeNick} />
-            <input type="email" value={email} onChange={changeEmail} />
-            <input type="password" value={password} onChange={changePassword} />
-            <input type="password" value={passwordConfirmation} onChange={changePasswordConfirmation} />
-        </div>
+    return (
+        <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+                <label htmlFor="nickname" className="form-label">Create nickname</label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="nickname"
+                    placeholder="Nickname"
+                    value={nickname}
+                    onChange={changeNickname}
+                />
+                <div className="invalid-feedback">Error nickname</div>
+            </div>
+
+            <div className="mb-3">
+                <label htmlFor="email" className="form-label">Enter your email</label>
+                <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={changeEmail}
+                />
+                <div className="invalid-feedback">Error email</div>
+            </div>
+
+            <div className="mb-3">
+                <label htmlFor="password" className="form-label">Create password</label>
+                <input
+                    type="password"
+                    className="form-control"
+                    id="password" 
+                    placeholder="Password"
+                    value={password}
+                    onChange={changePassword}
+                />
+                <div className="invalid-feedback">Error password</div>
+            </div>
+
+            <div className="mb-3">
+                <label htmlFor="password-confirmation" className="form-label">Confirm password</label>
+                <input
+                    type="password"
+                    className="form-control"
+                    id="password-confirmation"
+                    placeholder="Password"
+                    value={passwordConfirmation}
+                    onChange={changePasswordConfirmation}
+                />
+                <div className="invalid-feedback">Error password</div>
+            </div>
+
+            <Button type="submit">Submit</Button>
+        </form>
     )
 }
 

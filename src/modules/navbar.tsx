@@ -7,18 +7,18 @@ import AuthNavbarItems from '../components/authNavbarItems';
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary h-16">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" href="/">
                     <Image
                         height={48}
                         width={48}
                         src="/twitter-icon.png"
                         alt=""
                     />
-                </a>
+                </Link>
 
-                <ul className="navbar-nav gap-16">
+                <ul className="navbar-nav gap-8">
                     {appConfig.navbarItems.map(({ label, href }) =>
                         <li className="nav-item" key={href}>
                             <Link className="nav-link active" aria-current="page" href={href}>

@@ -1,14 +1,21 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { IAuthNavbarItem } from "../models";
-import { Button } from "../ui";
+import { Button, Modal } from "../ui";
+import RegistrtionForm from "../modules/registrtionForm";
 
 const AuthNavbarItems = () => {
-    const handleSignup = useCallback(() => {
+    const [isRegistrationModalOpen, setRegistrationModalOpen] = useState(false);
+    const [isLoginModalOpen, setLoginModalOpen] = useState(false);
 
+    console.log(isRegistrationModalOpen);
+    
+
+    const openRegistrationModal = useCallback(() => {
+        setRegistrationModalOpen(true);
     }, []);
 
-    const handleLogin = useCallback(() => {
-
+    const openLoginModal = useCallback(() => {
+        setLoginModalOpen(true);
     }, []);
 
     const handleSignout = useCallback(() => {
@@ -22,15 +29,15 @@ const AuthNavbarItems = () => {
             ]
         } else {
             return [
-                { label: 'Sign Up', theme: 'primary', onClick: handleSignup },
-                { label: 'Sign In', theme: 'secondary', onClick: handleLogin },
+                { label: 'Sign Up', theme: 'primary', onClick: openRegistrationModal },
+                { label: 'Sign In', theme: 'secondary', onClick: openLoginModal },
             ]
         }
     }
 
     return (
-        <div>
-            {getAuthNavbarItems(true).map(({ label, theme, onClick }) => (
+        <div className="flex gap-8">
+            {getAuthNavbarItems(false).map(({ label, theme, onClick }) => (
                 <Button
                     key={label}
                     type="button"
@@ -40,6 +47,14 @@ const AuthNavbarItems = () => {
                     {label}
                 </Button>
             ))}
+
+            <Modal isOpen={isRegistrationModalOpen} onClose={() => setRegistrationModalOpen(false)}>
+                <RegistrtionForm />
+            </Modal>
+
+            <Modal isOpen={isLoginModalOpen} onClose={() => setLoginModalOpen(false)}>
+                <RegistrtionForm />
+            </Modal>
         </div>
     )
 }
