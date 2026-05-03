@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { appConfig } from '../config';
 import Image from 'next/image';
-import AuthNavbarItems from '../components/authNavbarItems';
+import { AuthNavbarItems } from '../components';
 
 const Navbar = () => {
     return (

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { IAuthNavbarItem } from "../models";
 import { Button, Modal } from "../ui";
-import RegistrtionForm from "../modules/registrtionForm";
+import { RegistrtionForm } from "../modules";
 
 const AuthNavbarItems = () => {
     const [isRegistrationModalOpen, setRegistrationModalOpen] = useState(false);

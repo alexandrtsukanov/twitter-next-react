@@ -1,3 +1,5 @@
+'use client';
+
 import { ChangeEvent, SubmitEvent, useState } from "react";
 import { Button } from "../ui";
 
@@ -34,6 +36,8 @@ const RegistrtionForm = ({ onClose }: IProps) => {
 
     return (
         <form onSubmit={handleSubmit}>
+            <div className="invalid-feedback">Error nickname</div>
+
             <div className="mb-3">
                 <label htmlFor="nickname" className="form-label">Create nickname</label>
                 <input
@@ -44,7 +48,6 @@ const RegistrtionForm = ({ onClose }: IProps) => {
                     value={nickname}
                     onChange={changeNickname}
                 />
-                <div className="invalid-feedback">Error nickname</div>
             </div>
 
             <div className="mb-3">
@@ -57,7 +60,6 @@ const RegistrtionForm = ({ onClose }: IProps) => {
                     value={email}
                     onChange={changeEmail}
                 />
-                <div className="invalid-feedback">Error email</div>
             </div>
 
             <div className="mb-3">
@@ -70,7 +72,6 @@ const RegistrtionForm = ({ onClose }: IProps) => {
                     value={password}
                     onChange={changePassword}
                 />
-                <div className="invalid-feedback">Error password</div>
             </div>
 
             <div className="mb-3">
@@ -83,13 +84,11 @@ const RegistrtionForm = ({ onClose }: IProps) => {
                     value={passwordConfirmation}
                     onChange={changePasswordConfirmation}
                 />
-                <div className="invalid-feedback">Error password</div>
             </div>
 
             <div>
                 <Button type="submit">Submit</Button>
                 <Button theme="secondary" onClick={onClose}>Cancel</Button>
-
             </div>
         </form>
     )

@@ -1,27 +1,29 @@
 'use client';
 
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 interface IProps {
     isOpen: boolean;
     onClose: () => void;
-    title?: string;
-    successBtnText?: string;
-    closeBtnText?: string;
     children: ReactNode;
-    onSuccess?: () => void;
+    title?: string;
 };
 
 const Modal = ({
     isOpen,
     onClose,
-    title = 'Header',
-    successBtnText = 'Success',
-    closeBtnText,
     children,
-    onSuccess,
+    title = 'Header',
 }: IProps) => {
+    const container = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        if (document) {
+            container.current = document.body;
+        }
+    }, []);
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -29,11 +31,13 @@ const Modal = ({
             document.body.style.overflow = 'auto';
         }
     }, [isOpen]);
-    
+
+    if (!container.current) return null;
+
     if (!isOpen) return null;
 
     return createPortal(
-        <div className="modal" onClick={onClose}>
+        <div className="modal" onClick={onClose} tabIndex={-1} id="exampleModal" style={{ height: '600px', width: '500px' }}>
             <div className="modal-dialog">
                 <div className="modal-content" onClick={e => e.stopPropagation()}>
                     <div className="modal-header">
@@ -44,24 +48,10 @@ const Modal = ({
                     <div className="modal-body">
                         {children}
                     </div>
-
-                    <div className="modal-footer">
-                        {!!closeBtnText && (
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">{closeBtnText}</button>
-                        )}
-
-                        <button
-                            type="button"
-                            className="btn btn-primary"
-                            onClick={() => onSuccess?.()}
-                        >
-                            {successBtnText}
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>,
-        document.body,
+        container.current,
     )
 }
 
